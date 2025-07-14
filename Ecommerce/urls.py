@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django_prometheus import exports
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -25,6 +26,7 @@ urlpatterns = [
     path("", include("Commerce.urls")),
     path("user/", include("useruths.urls")),
     path('', include('django_prometheus.urls')),
+    path("metrics/", exports.ExportToDjangoView),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
