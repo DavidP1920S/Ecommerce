@@ -14,7 +14,7 @@ jobs:
 
     - name: Subir archivos a EC2
       run: |
-        echo "${{ secrets.EC2_KEY }}" | base64 -d > key.pem
+        echo "${{ secrets.EC2_KEY }}"  > key.pem
         chmod 400 key.pem
         rsync -avz -e "ssh -o StrictHostKeyChecking=no -i key.pem" ./ ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/${{ secrets.EC2_USER }}/miapp/
 
