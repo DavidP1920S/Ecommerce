@@ -16,8 +16,8 @@ jobs:
       run: |
         echo "${{ secrets.EC2_KEY }}" > key.pem
         chmod 400 key.pem
-        
-    - name: Subir archivos al servidor EC2
+
+    - name: Subir archivos al servidor EC2l
       run: |
         rsync -avz --delete \
           -e "ssh -o StrictHostKeyChecking=no -i key.pem" \
