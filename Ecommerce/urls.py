@@ -26,7 +26,6 @@ urlpatterns = [
     path("", include("Commerce.urls")),
     path("user/", include("useruths.urls")),
     path('', include('django_prometheus.urls')),
-    path("metrics/", exports.ExportToDjangoView),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
