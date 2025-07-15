@@ -17,7 +17,7 @@ jobs:
         echo "${{ secrets.EC2_KEY }}" > key.pem
         chmod 400 key.pem
 
-    - name: Subir archivos al servidor EC2l
+    - name: Subir archivos al servidor EC2
       run: |
         rsync -avz --delete \
           -e "ssh -o StrictHostKeyChecking=no -i key.pem" \
@@ -26,7 +26,9 @@ jobs:
     - name: Ejecutar Docker Compose en EC2
       run: |
         ssh -i key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-          cd miapp
+          cd /home/${{ secrets.EC2_USER }}/miapp
           docker-compose down || true
           docker-compose up -d --build
         EOF
+
+        
